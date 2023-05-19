@@ -1,0 +1,72 @@
+/* You can add global styles to this file, and also import other style files */
+/* .{
+
+} */
+.container{
+    margin-top:60px !important;
+}
+#btn {
+    background-color: #295B09 !important;
+    color: white !important;
+    font-weight: 600;
+    border-color: #295B09;
+}
+
+#fondo{
+  background-image: url(../src/assets/image/fondo.jpg);
+}
+
+#btn-search{
+  background-color: #295B09 !important;
+  color: white !important;
+  font-weight: 600;
+  border-color: #295B09;
+}
+
+#btnDos {
+    background-color: #588c38 !important;
+    color: white !important;
+    font-weight: 600;
+    border-color: #588c38;
+}
+
+.fondo{
+  background-image: url(../src/assets/image/fondo.jpg);
+}
+
+.form-control:focus:not(:placeholder-shown) {
+    border-color: rgb(88, 140, 56); /* Reemplaza esto con tu color deseado */
+    box-shadow: 0 0 0 0.2rem rgba(88, 140, 56, 0.25); /* Reemplaza esto con el valor rgba correspondiente */
+  }
+
+
+  input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #c6f5a871 inset !important; /* Reemplaza #ff5733 con tu color deseado */
+  box-shadow: 0 0 0 30px #c6f5a871 inset !important; /* Reemplaza #ff5733 con tu color deseado */
+}
+
+.editar{
+  color:#295B09 !important;
+}
+.eliminar{
+  color:rgb(240, 86, 86) !important;
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mat-snack-bar-container {
+  background-color: #ffffffbc !important;
+  color: #295B09 !important;
+}
+
+.my-snackbar {
+  background-color: #ffffffbc !important;
+  color: #295B09 !important;
+  font-weight: 700 !important;
+}

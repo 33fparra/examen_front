@@ -1,0 +1,166 @@
+  <app-navbar></app-navbar>
+
+  <div class="container">
+    <h1>Panel de Administracion {{this.titleCab}}</h1>
+  </div>
+  
+
+  <!-- Main content -->
+ <div class="container">
+
+  <div class="row" id="gestion">
+   <div class="col-lg-12">
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">Gestión de puntos de reciclaje</h3>
+       </div>
+       <!-- /.card-header -->
+       <div class="card-body">
+         <p>Aquí se podrán gestionar los puntos de reciclaje disponibles en el sistema.</p>
+       </div>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+   </div>
+   <!-- /.col-lg-12 -->
+ </div>
+ <!-- /.row -->
+
+ <div class="row" id="addPoint">
+   <div class="col-lg-6">
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">Agregar punto de reciclaje</h3>
+       </div>
+       <!-- /.card-header -->
+       <div class="card-body">
+         <form>
+           <div class="form-group">
+             <label for="nombrePunto">Nombre del punto de reciclaje:</label>
+             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre del punto" [(ngModel)]="pR.nombre">
+           </div>
+           <div class="form-group">
+             <label for="direccionPunto">Dirección:</label>
+             <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese la dirección del punto" [(ngModel)]="pR.direccion">
+           </div>
+           <div class="form-group">
+            <label for="telefonoPunto">Horario de Atención:</label>
+            <input type="tel" class="form-control" id="horarioAtencion" name="horarioAtencion" placeholder="Ingrese el horario de atención" [(ngModel)]="pR.horarioAtencion">
+          </div>
+           <div class="form-group">
+             <label for="telefonoPunto">Teléfono:</label>
+             <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el número de teléfono" [(ngModel)]="pR.telefono">
+           </div>
+           <div class="map-responsive">
+            <google-map 
+              [center]="center"
+              [zoom]="zoom"
+              (mapClick)="addMarker($event)">
+              <map-marker *ngFor="let markerPosition of markerPositions"
+                          [position]="markerPosition"
+                          [options]="markerOptions"></map-marker>
+              </google-map>
+            </div>
+           <button type="submit" class="btn" id="btn" (click)="guardarPunto()">Agregar</button>
+         </form>
+       </div>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+   </div>
+   <!-- /.col-lg-6 -->
+
+   <div class="col-lg-6">
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">Modificar punto de reciclaje</h3>
+       </div>
+       <!-- /.card-header -->
+       <div class="card-body">
+         <form>
+           <div class="form-group">
+             <label for="selectPunto">Seleccionar punto de reciclaje:</label>
+             <select class="form-control" id="selectPunto" [(ngModel)]="prselect.id" (change)="seleccionar()">
+               <option *ngFor="let puntoReciclaje of listPuntoReciclaje" [value]="puntoReciclaje.id">{{puntoReciclaje.nombre}}</option>
+             </select>
+           </div>
+           <div class="form-group">
+             <label for="nuevoNombrePunto">Nuevo nombre:</label>
+             <input type="text" class="form-control" id="nuevoNombrePunto" placeholder="Ingrese el nuevo nombre del punto" [(ngModel)]="prselect.nombre">
+           </div>
+           <div class="form-group">
+             <label for="nuevaDireccionPunto">Nueva dirección:</label>
+             <input type="text" class="form-control" id="nuevaDireccionPunto" placeholder="Ingrese la nueva dirección del punto" [(ngModel)]="prselect.direccion">
+           </div>
+           <div class="form-group">
+             <label for="nuevoTelefonoPunto">Nuevo teléfono:</label>
+             <input type="text" class="form-control" id="nuevoTelefonoPunto" placeholder="Ingrese el nuevo teléfono" [(ngModel)]="prselect.telefono">
+         </div>
+         <div class="form-group">
+             <label for="nuevoHorarioPunto">Nuevo horario:</label>
+             <input type="text" class="form-control" id="nuevoHorarioPunto" placeholder="Ingrese el nuevo horario" [(ngModel)]="prselect.horarioAtencion">
+         </div>
+         <button type="submit" class="btn" id="btn">Guardar cambios</button>
+         <button type="button" class="btn" id="btnDos" data-dismiss="modal">Cancelar</button>
+         </form>
+       </div>
+     </div>
+   </div>
+ </div>
+
+ </div>
+
+ <div>
+ 
+  <div class="container">
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Punto Reciclaje </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="horario">
+      <th mat-header-cell *matHeaderCellDef> Horario de Atención </th>
+      <td mat-cell *matCellDef="let element"> {{element.horarioAtencion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="telefono">
+      <th mat-header-cell *matHeaderCellDef> Teléfono </th>
+      <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="direccion">
+      <th mat-header-cell *matHeaderCellDef> Dirección </th>
+      <td mat-cell *matCellDef="let element"> dirección </td> <!-- {{element.direccion}}-->
+    </ng-container>
+
+    <ng-container matColumnDef="latitud">
+      <th mat-header-cell *matHeaderCellDef> Latitud </th>
+      <td mat-cell *matCellDef="let element"> {{element.latitud}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="longitud">
+      <th mat-header-cell *matHeaderCellDef> Longitud </th>
+      <td mat-cell *matCellDef="let element"> {{element.longitud}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon aria-hidden="false" aria-label="Editar" class="editar">edit</mat-icon>
+        <mat-icon aria-hidden="false" aria-label="Eliminar" class="eliminar" (click)="abrirModal(element)">delete</mat-icon>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="nombreDeLasColumnas"></tr>
+    <tr mat-row *matRowDef="let row; columns: nombreDeLasColumnas;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+
+
+
+
+ </div>
+ <div class="abajo"></div>

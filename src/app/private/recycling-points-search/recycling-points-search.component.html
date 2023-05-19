@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4"><img class="justify-content-center align-items-center" src="../../../assets/logo/logo.png" alt="" width="60">Buscar puntos de reciclaje</h1>
+    <div class="mb-3">
+        <label for="search-input" class="form-label">Ingrese una ubicación:</label>
+        <input type="text" class="form-control" id="search-input" placeholder="Ej: Av. Providencia, Santiago">
+    </div>
+    <button type="button" class="btn mb-4" id="btn">Buscar puntos de reciclaje</button>
+    <button type="button" class="btn mb-4" id="btnDos" routerLink="/">Volver</button>
+
+
+
+    <google-map height="400px"
+            width="750px"
+            [center]="center"
+            [zoom]="zoom"
+            (mapClick)="addMarker($event)">
+    <map-marker *ngFor="let markerPosition of markerPositions"
+                [position]="markerPosition"
+                [options]="markerOptions"></map-marker>
+    </google-map>
+</div>
